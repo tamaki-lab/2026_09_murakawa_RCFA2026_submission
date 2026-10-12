@@ -1,0 +1,9 @@
+# Challenge data, generated scores and submission ZIPs are never committed.
+challenge_data/
+outputs/
+*.zip
+*.npz
+*.npy
+.venv/
+__pycache__/
+*.pyc
