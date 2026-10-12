@@ -19,8 +19,8 @@ import numpy as np
 # (RCFA2026_ogata_bal_ete_b8d.zip, 262,355,334 bytes, outer SHA-256
 # acb908f5ded59e62769d7f9c30e2860122d244a20ac5bbf493a4d4cc0e018e72).
 EXPECTED = {
-    "track1.zip": None,
-    "track2.zip": None,
+    "track1.zip": "e95affb69bb6cb37499353fcbed39285594c1546d53ad423b3f680c8c556b2e9",  # 139,277,873 bytes
+    "track2.zip": "9061267752bb80ed5b3b27f291aa66da2b77c4cff361a963e8cf817fbbac6b94",  # 123,077,247 bytes
 }
 
 

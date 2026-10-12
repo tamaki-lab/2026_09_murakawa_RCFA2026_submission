@@ -1,11 +1,13 @@
-# RCFA 2026 — code for the final submission 980314
+# RCFA 2026 — team TamakiLab — code for the final submission 980314
 
 This repository contains the complete inference code that generated our selected final submission to the
 RCFA 2026 Challenge (Codabench), together with the environment specification and the commands to reproduce it.
 
 | Item | Value |
 | --- | --- |
-| CodaBench account | `yogata` |
+| Team | TamakiLab |
+| CodaBench accounts of the team | `mositaku`, `yogata` |
+| Account of the final submission | **`yogata`** |
 | Submission ID | **980314** |
 | Submitted file | `RCFA2026_ogata_bal_ete_b8d.zip` (262,355,334 bytes, SHA-256 `acb908f5ded59e62769d7f9c30e2860122d244a20ac5bbf493a4d4cc0e018e72`) |
 | Official result | T1-EER 0.0019176081, T2 Balanced Error 0.08577983 |
@@ -18,7 +20,9 @@ RCFA 2026 Challenge (Codabench), together with the environment specification and
   third-party dependency (`requirements.txt`).
 - No model weights, no pretrained networks and no external data: the method has no trained parameters. All
   constants are fixed in the code; everything else is computed at run time from the released embeddings.
-- Runtime: RUNTIME_PLACEHOLDER. Memory: MEMORY_PLACEHOLDER.
+- Runtime: about 13 minutes for both tracks with 6 workers on an Intel Xeon Gold 5418Y (775 s of scoring,
+  13 min wall clock for `reproduce.sh`). Memory: at most about 0.6 GB per process (about 4 GB with 6 workers).
+  Disk: about 0.5 GB for the output.
 
 The scores are bit-reproducible on Linux x86-64 with the versions above and one BLAS thread per process (set
 automatically). On macOS, NumPy's Accelerate backend can raise `FloatingPointError` in `matmul` or give different
@@ -66,8 +70,8 @@ whenever the scores are identical:
 
 | Inner archive of 980314 | SHA-256 |
 | --- | --- |
-| `track1.zip` | INNER1_PLACEHOLDER |
-| `track2.zip` | INNER2_PLACEHOLDER |
+| `track1.zip` (139,277,873 bytes) | `e95affb69bb6cb37499353fcbed39285594c1546d53ad423b3f680c8c556b2e9` |
+| `track2.zip` (123,077,247 bytes) | `9061267752bb80ed5b3b27f291aa66da2b77c4cff361a963e8cf817fbbac6b94` |
 
 ```bash
 .venv/bin/python scripts/compare_submission.py outputs/980314/submission.zip                 # against the table above
@@ -87,7 +91,7 @@ whenever the scores are identical:
   overlapping rows to be bit-identical.
 
 ```bash
-.venv/bin/python scripts/check_causality.py /path/to/DATA_DIR --sequences 2
+.venv/bin/python scripts/check_causality.py /path/to/DATA_DIR --sequences 2   # about 12 minutes, prints PASS
 ```
 
 ## Method overview
