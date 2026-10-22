@@ -65,7 +65,7 @@ PYTHON=.venv/bin/python bash reproduce.sh /path/to/DATA_DIR outputs/980314 6
 
 `reproduce.sh DATA_DIR OUT_DIR [WORKERS]` runs three steps:
 
-1. `scripts/ogata/build_candidate_par.py bal_ete_b8d OUT_DIR WORKERS` scores all 400 sequences (one worker
+1. `scripts/core/build_candidate_par.py bal_ete_b8d OUT_DIR WORKERS` scores all 400 sequences (one worker
    process per sequence, fresh state for every sequence) and writes `OUT_DIR/submission.zip` in the challenge format
    (`track1.zip` and `track2.zip`, one `score_<sequence>.npz` with a `(frames, 200)` float32 array `score` per
    sequence) plus `OUT_DIR/receipt.json`. It refuses to overwrite an existing `submission.zip`. While building it
@@ -123,13 +123,13 @@ The Track-1 operating threshold (FAR = 1e-5, about 0.84) lies inside the band H 
 and the operating point come from H, while the Track-1 EER threshold (about -0.10) lies inside the band below 0.5,
 which comes from L.
 
-- **H — attack-aware score** (`scripts/ogata/analyze_t2_stage_s.py`, `variants_h(x, g)["ete"]`). A posterior-odds
+- **H — attack-aware score** (`scripts/core/analyze_t2_stage_s.py`, `variants_h(x, g)["ete"]`). A posterior-odds
   score from a long-term cubic-kernel memory of gallery evidence and a quality-weighted short-term moving average,
   with competitive ownership across identities and multiplicative discounts that lower an identity's score when its
   recent evidence stops looking like the verified frames of the same sequence: survival-type discounts on the
   current evidence and on verification, a row-energy discount relative to the sequence's own history, and a
   residual-template discount whose per-identity template is frozen after the first 100 verified clean frames.
-- **L — identity-discriminative score** (`scripts/final_stretch/t1_b8d.py`, `b8d_core`, building on
+- **L — identity-discriminative score** (`scripts/t1_bank/t1_b8d.py`, `b8d_core`, building on
   `t1_bank*.py`). Label-free causal ownership: once one identity leads the running count of verified clean frames,
   the other 199 columns of that frame are set to -1. Frames without an owner are mapped from causal z-statistics
   chosen by the state of the sequence (opening frames, middle, late, low-information rows); after the detected
@@ -144,14 +144,17 @@ which comes from L.
 | Path | Content |
 | --- | --- |
 | `reproduce.sh` | One-command reproduction |
-| `scripts/ogata/build_candidate_par.py` | Builder used for the submission (config `bal_ete_b8d`) |
-| `scripts/ogata/bal_ete_b8d.py` | The composite scorer: `bal(x, g)` |
-| `scripts/ogata/analyze_t2_stage_s.py` and imports | H |
-| `scripts/final_stretch/t1_b8d.py` and imports | L |
+| `scripts/core/build_candidate_par.py` | Builder used for the submission (config `bal_ete_b8d`) |
+| `scripts/core/bal_ete_b8d.py` | The composite scorer: `bal(x, g)` |
+| `scripts/core/analyze_t2_stage_s.py` and imports | H |
+| `scripts/t1_bank/t1_b8d.py` and imports | L |
 | `rcfa/` | Shared embedding methods and b |
 | `scripts/build_candidate_submission.py` | Deterministic ZIP / NPZ writing and data loading |
 | `scripts/validate_submission.py` | Format check |
 | `scripts/check_causality.py`, `scripts/compare_submission.py` | Verification helpers added for this package |
+
+Directory names: the submitted code lived in `scripts/ogata/` and `scripts/final_stretch/`; for this public release they were
+renamed to `scripts/core/` and `scripts/t1_bank/` (only the directory names and the paths that refer to them changed).
 
 All other files are unmodified copies, from the team repository at the commit used to build 980314 (`72af240`),
 of every module the scorer imports. Several of them are research modules that also contain analysis code; only the

@@ -21,7 +21,7 @@ export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 cd "$HERE"
 "$PY" -c 'import platform, sys, numpy; print("python", sys.version.split()[0], "| numpy", numpy.__version__, "|", platform.platform())'
 date
-RCFA_DATA="$DATA_DIR" "$PY" -B scripts/ogata/build_candidate_par.py bal_ete_b8d "$OUT_DIR" "$WORKERS"
+RCFA_DATA="$DATA_DIR" "$PY" -B scripts/core/build_candidate_par.py bal_ete_b8d "$OUT_DIR" "$WORKERS"
 "$PY" -B scripts/validate_submission.py "$OUT_DIR/submission.zip" --data-root "$DATA_DIR"
 "$PY" -B scripts/compare_submission.py "$OUT_DIR/submission.zip"
 date

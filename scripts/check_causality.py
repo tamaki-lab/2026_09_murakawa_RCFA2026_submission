@@ -3,7 +3,7 @@
 Usage: python scripts/check_causality.py DATA_DIR [--sequences N]
 
 For the first N probe sequences of each track (sorted file order), the exact build function
-(build_candidate.CONFIGS["bal_ete_b8d"], the one scripts/ogata/build_candidate_par.py uses) scores the whole sequence
+(build_candidate.CONFIGS["bal_ete_b8d"], the one scripts/core/build_candidate_par.py uses) scores the whole sequence
 once and then each prefix x[:c]; the rows 0..c-1 must be bit-identical to the full run. The cuts cover the opening
 (t < 10), the jump search window (t < 60) and later parts of the sequence. Exit code 0 means every cut matched.
 """
@@ -18,7 +18,7 @@ for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-sys.path.insert(0, str(HERE / "ogata"))
+sys.path.insert(0, str(HERE / "core"))
 sys.path.insert(0, str(ROOT))
 import numpy as np  # noqa: E402
 
