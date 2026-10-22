@@ -21,6 +21,7 @@ by re-running the submitted code.
 | --- | --- |
 | Team | TamakiLab |
 | CodaBench accounts of the team | `mositaku`, `yogata` |
+| Roles | `mositaku`: Track 1, environment setup, team lead; `yogata`: Track 2 |
 | Account of the final submission | **`yogata`** |
 | Submission ID | **980314** |
 | Submitted file | `RCFA2026_ogata_bal_ete_b8d.zip` (262,355,334 bytes, SHA-256 `acb908f5ded59e62769d7f9c30e2860122d244a20ac5bbf493a4d4cc0e018e72`) |
