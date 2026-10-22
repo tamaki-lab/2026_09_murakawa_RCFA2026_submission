@@ -1,7 +1,21 @@
 # RCFA 2026 — team TamakiLab — code for the final submission 980314
 
 This repository contains the complete inference code that generated our selected final submission to the
-RCFA 2026 Challenge (Codabench), together with the environment specification and the commands to reproduce it.
+[RCFA 2026 Challenge](https://sites.google.com/view/rcfa-2026/home) (Workshop and Challenge on Robust Continuous
+Face Authentication, ACCV 2026 workshop; evaluated on [Codabench](https://www.codabench.org/competitions/17759/)),
+together with the environment specification and the commands to reproduce it.
+
+## Final results
+
+Team TamakiLab (Nagoya Institute of Technology) ranked **1st in Track 1, 1st in Track 2 and 1st overall** in the
+[official final ranking](https://sites.google.com/view/rcfa-2026/challenge-results), which the organizers computed
+by re-running the submitted code.
+
+| Ranking | TamakiLab | Runner-up |
+| --- | --- | --- |
+| Track 1 (Robustness), T1-EER ↓ | **0.001918 (1st)** | SRGEM 0.001921 |
+| Track 2 (Security), T2-Balanced Error ↓ | **0.08578 (1st)** | Asakatsu2026 0.262432 |
+| Overall (rank sum of Track 1 and Track 2) | **1st (rank sum 2)** | Asakatsu2026 and SRGEM (rank sum 5) |
 
 | Item | Value |
 | --- | --- |
@@ -141,3 +155,8 @@ which comes from L.
 All other files are unmodified copies, from the team repository at the commit used to build 980314 (`72af240`),
 of every module the scorer imports. Several of them are research modules that also contain analysis code; only the
 functions reached from `bal_ete_b8d.bal` are used to produce the scores.
+
+## License
+
+Released under the [MIT License](LICENSE). The challenge data and embeddings are not part of this repository and
+remain subject to the RCFA 2026 data use agreement.
